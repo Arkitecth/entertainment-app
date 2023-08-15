@@ -199,6 +199,8 @@ button[type="submit"]:hover {
 
 .carousel {
     padding-top: 20px;
+    display: flex;
+    gap: 40px;
 }
 
 .trending.card {
@@ -206,4 +208,31 @@ button[type="submit"]:hover {
     height: 230px;
     border-radius: 8px;
     background: url("./assets/thumbnails/beyond-earth/trending/small.jpg");
+    position: relative;
+}
+
+.bookmarkIcon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.description {
+    display: flex;
+    height: 90%;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-left: 20px;
+}
+
+.details ul {
+    display: flex;
+    gap: 20px;
+    opacity: 0.75;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.remove-style {
+    list-style-type: none;
 }
