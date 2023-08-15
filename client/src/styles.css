@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --red: #FC4747; 
+    --dark-blue: #10141e;
+    --greyish-blue: #5a698f;
+    --semi-dark-blue: #161d2f;   
+    --pure-white: #ffffff; 
+}
+
+/* Login Styles */
+body {
+    background-color: var(--dark-blue);
+    font-family: 'Outfit', sans-serif;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    align-items: center;
+    padding-top: 5%;
+}
+
+
+/* Form Container */
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--semi-dark-blue);
+    border-radius: 20px;
+    padding: 2% 5%;
+}
+
+.form-container h1 {
+    color: var(--pure-white); 
+    padding: 10px 0 ;
+    font-weight: 300;
+}
+
+.form-container p {
+    padding: 0 30px;
+    color: #ffffff;
+    font-weight: 300;
+}
+
+
+/* Input Styles */
+
+input {
+    border: none; 
+    border-bottom: 1px solid var(--greyish-blue);
+    background-color: transparent;
+    padding: 10px;
+    caret-color: var(--red);
+    color: var(--pure-white);
+}
+
+input::placeholder {
+    color: #ffffff;
+    opacity: 0.5;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+}
+
+input:focus {
+    outline: none;
+}
+
+
+/* Button Styles */
+button[type="submit"] {
+    border: none;
+    border-radius: 6px;
+    background-color: var(--red);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    padding: 18px;
+    font-size: 15px;
+    color: var(--pure-white);
+    cursor: pointer;
+
+}
+button[type="submit"]:active {
+    transform: translateY(4px);
+}
+button[type="submit"]:hover {
+    background-color: #ffffff;
+    color: #333;
+}
+
+.sign-up {
+    color: var(--red);
+    padding-left: 30px;
+}
+
+
+
+/* Home */
+
+
+/* Showcase */
+.showcase {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(5, auto);
+    grid-auto-flow: row;
+}
+
+
+/* Home Navbar */
+.navbar {
+    width: 60px;
+    height: 960px;
+    background-color: var(--semi-dark-blue);
+    grid-row: 1 / 5;
+    border-radius: 20px;
+    padding: 15px;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.logo {
+    padding-top: 20px;
+}
+
+.nav-icons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    cursor: pointer;
+}
+
+
+.nav-icons img {
+    padding: 15px;
+}
+
+.nav-icons img:hover {
+    filter: brightness(0%) invert(40%) sepia(80%) saturate(2672%) hue-rotate(334deg) brightness(103%) contrast(104%);
+}
+
+.avatar {
+    margin-top: 550px;
+    border-radius: 40px;
+    border: 1px solid var(--pure-white);
+    width: 40px;
+    height: 40px;
+}
+
+
+
+
+
+/* Search bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    grid-row: 1;
+    padding: 50px 15px;
+    width: 85vw;
+}
+.search-icon {
+    padding-right: 30px;
+}
+#search {
+    padding: 10px 0;
+    font-size: 24px;
+    border-bottom: none;
+}
+
+#search:active, 
+#search:hover {
+    border-bottom: 1px solid var(--greyish-blue);
+    width: 90vw;
+}
+
+
+/* Trending */
+.trending-page {
+    grid-row: 2;
+    color: var(--pure-white);
+    padding-left: 30px;
+}
+
+.trending-page h2 {
+    font-size: 32px;
+    font-weight: 300;
+}
+
+.carousel {
+    padding-top: 20px;
+}
+
+.trending.card {
+    width: 470px;
+    height: 230px;
+    border-radius: 8px;
+    background: url("./assets/thumbnails/beyond-earth/trending/small.jpg");
+}
