@@ -109,8 +109,8 @@ button[type="submit"]:hover {
 /* Showcase */
 .showcase {
     display: grid;
-    grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: repeat(5, auto);
+    grid-template-columns: auto auto;
+    grid-template-rows: auto repeat(4, auto);
     grid-auto-flow: row;
 }
 
@@ -150,6 +150,12 @@ button[type="submit"]:hover {
     filter: brightness(0%) invert(40%) sepia(80%) saturate(2672%) hue-rotate(334deg) brightness(103%) contrast(104%);
 }
 
+/* Dynamic State */
+.active {
+    filter: brightness(0) invert(100%) sepia(0%) saturate(7500%) hue-rotate(28deg) brightness(103%) contrast(99%);;
+}
+
+
 .avatar {
     margin-top: 550px;
     border-radius: 40px;
@@ -167,7 +173,7 @@ button[type="submit"]:hover {
     display: flex;
     align-items: center;
     grid-row: 1;
-    padding: 50px 15px;
+    padding: 50px 15px 0;
     width: 85vw;
 }
 .search-icon {
@@ -186,11 +192,13 @@ button[type="submit"]:hover {
 }
 
 
+
 /* Trending */
 .trending-page {
     grid-row: 2;
     color: var(--pure-white);
     padding-left: 30px;
+    padding-top: 20px;
     overflow-x: auto;
 }
 
@@ -246,28 +254,40 @@ button[type="submit"]:hover {
 }
 
 
-/* Recommended */
-.recommended-page {
+.grid-row-2 {
+    grid-row: 2 !important;
+}
+
+.grid-row-3 {
+    grid-row:3; 
+}
+
+.grid-row-4 {
+    grid-row:4; 
+}
+/* Main Content(Recommended Page, Movie Page) */
+.main-page {
     grid-row: 3;
     padding-left: 30px;
     align-items: center;
-    padding-top: 20px;
-   
+    padding-top: 30px;
+    padding-bottom: 5%;
 }
 
-.recommended-page h2 {
+.main-page h2 {
     font-size: 32px;
     color: #ffffff;
     font-weight: 300;
+  
 }
 
-
-.recommended-content {
+.main-content {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-flow: row;
-    padding-top: 30px;
+    row-gap: 70px;
 }
+
 
 .card {
     width: 280px;
@@ -275,11 +295,18 @@ button[type="submit"]:hover {
     background:url("./assets/thumbnails/beyond-earth/trending/small.jpg");
     border-radius: 8px;
     position: relative;
-  
 }
 
-.description.recommended {
-    margin-top: 90px;
+.main-content .card{
+    margin-top: 32px;
+}
+
+.description.content {
+    margin-top: 70px;
     padding: 0;
     color: #ffffff;
 }
+.description.content h2 {
+    font-size: 18px;
+}
+
