@@ -223,7 +223,6 @@ button[type="submit"]:hover {
     min-width: 470px;
     height: 230px;
     border-radius: 8px;
-    background: url("./assets/thumbnails/beyond-earth/trending/small.jpg");
     position: relative;
 }
 
@@ -247,6 +246,7 @@ button[type="submit"]:hover {
     opacity: 0.75;
     font-size: 15px;
     font-weight: 300;
+    user-select: none;
 }
 
 .remove-style {
@@ -262,8 +262,8 @@ button[type="submit"]:hover {
     grid-row:3; 
 }
 
-.grid-row-4 {
-    grid-row:4; 
+.whiteFill {
+    fill: var(--pure-white);
 }
 /* Main Content(Recommended Page, Movie Page) */
 .main-page {
@@ -272,6 +272,7 @@ button[type="submit"]:hover {
     align-items: center;
     padding-top: 30px;
     padding-bottom: 5%;
+    user-select: none;
 }
 
 .main-page h2 {
@@ -292,7 +293,6 @@ button[type="submit"]:hover {
 .card {
     width: 280px;
     height: 174px;
-    background:url("./assets/thumbnails/beyond-earth/trending/small.jpg");
     border-radius: 8px;
     position: relative;
 }

@@ -13,7 +13,7 @@ export default function Nav() {
      <nav className='navbar'>
             <img className='logo' src={logo} alt="Logo" /> 
             <div className="nav-icons">
-            <NavLink exact activeClassName={'active'} to="/"> <img src={homeIcon} alt="homeIcon" /> </NavLink>
+            <NavLink activeclassname={'active'} to="/"> <img src={homeIcon} alt="homeIcon" /> </NavLink>
             <NavLink to="/movies"> <img src={movieIcon} alt="movieIcon" /></NavLink>
             <NavLink to="/series"> <img src={tvIcon} alt="tvIcon" /> </NavLink>
             <NavLink to="/bookmarks"> <img src={bookmarkNav} alt="bookmarkNav" />  </NavLink>
