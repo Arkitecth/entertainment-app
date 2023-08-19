@@ -14,6 +14,8 @@ export default function Home() {
   //     }
   //     getData()
   // }, [])
+  
+ 
     return (
       <div className='showcase'>
         <Nav/>
@@ -21,7 +23,7 @@ export default function Home() {
           {/* Trending Page */}
           <Trending dataObj={ contentData.filter((data) => data.isTrending) }/>
           {/* Recommended Page */}
-        <Content dataObj={  contentData.filter((data) => !data.isTrending) } heading={"Recommended For You"} row={"grid-row-3"}/>
+        <Content dataObj={  contentData.filter((data) => !data.isTrending) } heading={"Recommended For You"}/>
       </div>
     )
 }

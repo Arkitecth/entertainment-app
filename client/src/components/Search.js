@@ -11,7 +11,7 @@ export default function Search() {
     <div className='showcase'>
         <Nav />
         <SearchBar /> 
-        <Content heading={`Found ${filteredData.length} Results For ${title}`} row={"grid-row-2"} dataObj={filteredData} />
+        <Content heading={`Found ${filteredData.length} Results For ${title}`} dataObj={filteredData} />
     </div>
    
   )

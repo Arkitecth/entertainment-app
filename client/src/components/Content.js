@@ -11,7 +11,7 @@ export default function Content({heading, row, dataObj }) {
     }
     return (
         <div className={`main-page ${row}`}>
-        <h2>{heading}</h2>
+        <h2 className="heading">{heading}</h2>
         <div className="main-content">
             {dataObj.map((data,index) => (
             <div key={index} className="card" style={{background:`url("${data.thumbnail.regular.small}")`}}>
