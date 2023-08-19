@@ -1,7 +1,6 @@
 import React from 'react'
 import movieCategoryIcon from "../assets/icon-category-movie.svg"
 export default function Trending( { dataObj }) {
-console.log(dataObj)
   return (
     <div className="trending-page">
         <h2>Trending</h2>

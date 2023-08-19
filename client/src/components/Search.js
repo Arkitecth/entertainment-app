@@ -1,10 +1,19 @@
-import React from 'react'
-import searchIcon from "../assets/icon-search.svg"
+import SearchBar from "./SearchBar"
+import Nav from "./Nav"
+import Content from "./Content"
+import contentData from "../data.json"
+import { useLocation } from "react-router-dom"
 export default function Search() {
+    const {state} = useLocation(); 
+    const title  = state.title;
+    const filteredData = contentData.filter((data) => data.title.includes(title))
   return (
-    <div className="search-bar">
-        <img className='search-icon' src={searchIcon} alt="searchIcon" />
-        <input type="text" name="search" id="search" placeholder='Search for movies'/>
+    <div className='showcase'>
+        <Nav />
+        <SearchBar /> 
+        <Content heading={`Found ${filteredData.length} Results For ${title}`} row={"grid-row-2"} dataObj={filteredData} />
     </div>
+   
   )
 }
+

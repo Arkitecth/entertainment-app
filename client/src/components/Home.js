@@ -1,7 +1,7 @@
 import Nav from './Nav'
 import Trending from './Trending'
 import Content from './Content'
-import Search from './Search'
+import SearchBar from './SearchBar'
 import contentData from "../data.json"
 // import { useEffect, useState } from "react";
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
     return (
       <div className='showcase'>
         <Nav/>
-        <Search />
+        <SearchBar />
           {/* Trending Page */}
           <Trending dataObj={ contentData.filter((data) => data.isTrending) }/>
           {/* Recommended Page */}
