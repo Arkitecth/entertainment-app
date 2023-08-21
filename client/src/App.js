@@ -1,5 +1,5 @@
 import "./styles.css";
-// import Login from "./components/Login";
+import Login from "./components/Login";
 import Home from "./components/Home";
 import Movies from "./components/Movies";
 import Series from "./components/Series";
@@ -16,7 +16,8 @@ function App() {
         <>
           <Router>
             <Routes>
-              <Route exact path="/" Component={Home}/>
+              <Route exact path="/" Component={Login}/>
+              <Route exact path="/home" Component={Home}/>
               <Route exact path="/movies" Component={Movies}/>
               <Route exact path="/series" Component={Series}/>
               <Route exact path="/bookmarks" Component={Bookmark}/>
