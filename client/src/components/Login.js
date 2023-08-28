@@ -22,7 +22,7 @@ function Login() {
         const person = { ...form};
 
         try {
-           const response = await fetch("http://localhost:3001/login",{
+           const response = await fetch("http://localhost:3001/auth/login",{
                 method: "POST", 
                 headers: {
                     'Content-Type': "application/json",
@@ -53,7 +53,7 @@ function Login() {
                 <label htmlFor="submit"></label>
                <button type="submit">Login to your account</button>
               
-                <p>Don't have an account?  <NavLink style={{textDecoration:"none"}} to="/"> <span className="sign-up">Sign Up</span> </NavLink></p> 
+                <p>Don't have an account?  <NavLink style={{textDecoration:"none"}} to="/sign-up"> <span className="sign-up">Sign Up</span> </NavLink></p> 
             </form>
 
         </div>

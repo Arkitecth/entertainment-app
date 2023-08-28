@@ -5,9 +5,9 @@ import path from "path"
 import cors from "cors"
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
-import {login, register} from "./controllers/auth.js"
-// Configurations 
+import router from "./routes/auth.js"
 
+// Configurations 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename); 
 dotenv.config(); 
@@ -19,9 +19,7 @@ app.use(bodyParser.urlencoded({limit: "30mb", extended: true}))
 
 // Routes 
 app.use(cors());
-app.post("/register", register)
-
-app.post("/login", login)
+app.use("/auth", router)
 
 
 // MONGOOSE SETUP
@@ -33,3 +31,5 @@ mongoose.connect(process.env.MONGO_URL, {
 }).then(() => {
     app.listen(PORT, () => console.log(`Server Port ${PORT}`)); 
 }).catch((error) => console.log(`${error} did not connect`)); 
+
+

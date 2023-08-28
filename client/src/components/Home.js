@@ -9,7 +9,7 @@ export default function Home() {
         <Nav/>
         <SearchBar />
           {/* Trending Page */}
-          <Trending dataObj={ contentData.filter((data) => data.isTrending) }/>
+          <Trending/>
           {/* Recommended Page */}
         <Content dataObj={  contentData.filter((data) => !data.isTrending) } heading={"Recommended For You"}/>
       </div>

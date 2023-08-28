@@ -239,6 +239,7 @@ button[type="submit"]:hover {
     flex-direction: column;
     justify-content: flex-end;
     padding-left: 20px;
+    text-transform: capitalize;
 }
 
 .details ul {
@@ -312,6 +313,9 @@ button[type="submit"]:hover {
     font-size: 18px;
 }
 
+.cat-icon {
+    padding-right: 5px;
+}
 
 /* (min-width:375px)  */
 @media screen and (max-width:780px) {

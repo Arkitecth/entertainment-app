@@ -20,7 +20,7 @@ function SignUp() {
     async function handleSubmit(event) {
         event.preventDefault(); 
         const person = { ...form};
-        await fetch("http://localhost:3001/register", {
+        await fetch("http://localhost:3001/auth/register", {
             method: "POST", 
             headers: {
                 'Content-Type': "application/json",
@@ -49,7 +49,7 @@ function SignUp() {
 
                 <label htmlFor="submit"></label>
                <button type="submit">Create an account</button>
-               <p>Already have an account? <NavLink style={{textDecoration:"none"}} to="/login"> <span className="sign-up">Login</span> </NavLink> </p> 
+               <p>Already have an account? <NavLink style={{textDecoration:"none"}} to="/"> <span className="sign-up">Login</span> </NavLink> </p> 
             </form>
 
         </div>
