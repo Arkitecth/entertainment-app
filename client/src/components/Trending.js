@@ -55,11 +55,13 @@ export default function Trending() {
               <div className="details">
                 <ul>
                   <li className="remove-style">
+                    {" "}
                     {data.release_date === undefined
                       ? data.first_air_date.split("-")[0]
                       : data.release_date.split("-")[0]}
                   </li>
                   <li>
+                    {" "}
                     <img
                       className="cat-icon"
                       src={movieCategoryIcon}
@@ -71,7 +73,11 @@ export default function Trending() {
                     {data.media_type === "tv"
                       ? dataDetail[data.id].content_ratings["results"].filter(
                           (element) => element["iso_3166_1"] === "US"
-                        )[0].rating || dataDetail[data.id].genres[0].name
+                        )[0] !== undefined
+                        ? dataDetail[data.id].content_ratings["results"].filter(
+                            (element) => element["iso_3166_1"] === "US"
+                          )[0].rating
+                        : dataDetail[data.id].genres[0].name
                       : dataDetail[data.id].release_dates["results"].filter(
                           (element) => element["iso_3166_1"] === "US"
                         )[0].release_dates[0].certification ||
