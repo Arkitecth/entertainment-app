@@ -1,9 +1,8 @@
 import { useState } from "react";
 import logo from "../assets/logo.svg";
-import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
-function Login() {
+function Login({ getEmail }) {
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -15,11 +14,9 @@ function Login() {
     });
   }
 
-  const navigate = useNavigate();
   async function handleSubmit(event) {
     event.preventDefault();
     const person = { ...form };
-    const email = person.email;
     try {
       const response = await fetch("http://localhost:3001/auth/login", {
         method: "POST",
@@ -32,12 +29,13 @@ function Login() {
       if (!response.ok) {
         throw new Error(message.msg);
       } else {
-        navigate("/home", { state: { email } });
+        getEmail(form.email);
       }
     } catch (e) {
       window.alert(e);
     }
   }
+
   return (
     <div className="login-container">
       <img src={logo} alt="logo" />

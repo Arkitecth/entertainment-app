@@ -4,18 +4,16 @@ import Content from "./Content";
 import SearchBar from "./SearchBar";
 import Spinner from "./Spinner";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 export async function getData() {
   const response = await fetch("http://localhost:3001/auth/discover");
   const results = await response.json();
   return results;
 }
 
-export default function Home() {
+export default function Home({ email }) {
   const [dataObj, setDataObj] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { state } = useLocation();
-
+  console.log(email);
   useEffect(() => {
     getData().then((data) => {
       setDataObj(data);
@@ -31,10 +29,10 @@ export default function Home() {
           <Nav />
           <SearchBar />
           {/* Trending Page */}
-          <Trending userData={state} />
+          <Trending userData={email} />
           {/* Recommended Page */}
           <Content
-            userData={state}
+            userData={email}
             dataObj={dataObj}
             heading={"Recommended For You"}
           />

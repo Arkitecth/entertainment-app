@@ -1,5 +1,6 @@
 import movieCategoryIcon from "../assets/icon-category-movie.svg";
 import BookmarkIcon from "./BookmarkIcon";
+import seriesCategoryIcon from "../assets/icon-category-tv.svg";
 export default function Content({ heading, row, dataObj }) {
   return (
     <div className={`main-page ${row}`}>
@@ -17,12 +18,24 @@ export default function Content({ heading, row, dataObj }) {
             }}
           >
             <BookmarkIcon />
-            <div className="description content not-active">
+            <div className="description content">
               <div className="details">
                 <ul>
                   <li className="remove-style">2023</li>
                   <li>
-                    <img src={movieCategoryIcon} alt="categoryIcon" />
+                    {data.media_type === "movie" ? (
+                      <img
+                        className="cat-icon"
+                        src={movieCategoryIcon}
+                        alt="categoryIcon"
+                      />
+                    ) : (
+                      <img
+                        className="cat-icon"
+                        src={seriesCategoryIcon}
+                        alt="categoryIcon"
+                      />
+                    )}
                     {data.media_type}
                   </li>
                   <li>{data.genre}</li>

@@ -1,43 +1,32 @@
-import { get } from "mongoose";
 import fetch from "node-fetch";
 
 export const trending = async (req, res) => {
   const url = "https://api.themoviedb.org/3/trending/all/day?language=en-US";
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: process.env.MOVIE_API,
-    },
-  };
-  let detailResults = {};
-  try {
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      const message = `An error occured: ${response.status}`;
-      throw new Error(message);
-    }
-    const trending = await response.json();
 
-    let itemsProcessed = 0;
-    trending.results.forEach((element) => {
-      getTrendingDetails(element).then((data) => {
-        itemsProcessed += 1;
-        detailResults[data.id] = data;
-        if (itemsProcessed === trending.results.length) {
-          res
-            .status(200)
-            .json({ trending, isBookmarked: false, detailResults });
-        }
-      });
+  const trending = await callApi(url);
+  const trendingData = trending["results"];
+  const trendingResults = [];
+
+  for (const element of trendingData) {
+    let genre = await getGenre(element.id, element.media_type);
+    let airDate =
+      element.release_date === undefined
+        ? element.first_air_date.split("-")[0]
+        : element.release_date.split("-")[0];
+
+    trendingResults.push({
+      title: element.name || element.title,
+      media_type: element.media_type,
+      id: element.id,
+      date: airDate,
+      cover: element.backdrop_path,
+      genre: genre,
     });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: error });
   }
+  res.status(200).json(trendingResults);
 };
 
-async function callApi(url) {
+async function callApi(url, req, res) {
   const options = {
     method: "GET",
     headers: {
@@ -55,48 +44,9 @@ async function callApi(url) {
     const results = await response.json();
     return results;
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ error: error });
   }
 }
-
-async function getTrendingDetails(element) {
-  let trendingUrl = "";
-  if (element.media_type === "movie") {
-    trendingUrl = `https://api.themoviedb.org/3/${element.media_type}/${element.id}?append_to_response=release_dates&language=en-US`;
-  } else {
-    trendingUrl = `https://api.themoviedb.org/3/${element.media_type}/${element.id}?append_to_response=content_ratings&language=en-US`;
-  }
-  return callApi(trendingUrl);
-}
-
-export const details = async (req, res) => {
-  let url = "";
-  let rating = "";
-  if (req.params.name === "movie") {
-    url = `https://api.themoviedb.org/3/${req.params.name}/${req.params.id}?append_to_response=release_dates&language=en-US`;
-    let result = await callApi(url);
-    let results = result.release_dates["results"];
-    let filteredResults = results.filter(
-      (element) => element["iso_3166_1"] === "US"
-    )[0];
-    rating =
-      filteredResults.release_dates[0].certification || result.genres[0].name;
-  } else {
-    url = `https://api.themoviedb.org/3/${req.params.name}/${req.params.id}?append_to_response=content_ratings&language=en-US`;
-    let result = await callApi(url);
-    console.log(result);
-    let results = result.content_ratings["results"];
-    let filteredResults = results.filter(
-      (element) => element["iso_3166_1"] === "US"
-    )[0];
-    rating =
-      filteredResults !== undefined
-        ? filteredResults.rating
-        : result.genres[0].name;
-  }
-
-  return res.status(200).json(rating);
-};
 
 async function getGenre(id, mediaType) {
   let url = "";
@@ -155,6 +105,7 @@ export const discover = async (req, res) => {
       media_type: "movie",
       id: element.id,
       cover: element.backdrop_path,
+      date: element.release_date.split("-")[0],
       genre: genre,
     });
   }
@@ -166,6 +117,7 @@ export const discover = async (req, res) => {
       media_type: "tv",
       id: element.id,
       cover: element.backdrop_path,
+      date: element.first_air_date.split("-")[0],
       genre: genre,
     });
   }
