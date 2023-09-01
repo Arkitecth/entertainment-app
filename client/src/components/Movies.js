@@ -1,15 +1,33 @@
 import Content from "./Content";
 import Nav from "./Nav";
 import SearchBar from "./SearchBar";
-import contentData from "../data.json"
+import { getData } from "./Home";
+import { useState, useEffect } from "react";
+import Spinner from "./Spinner";
 
 export default function Movies() {
-  
-  return(
-    <div className='showcase'>
-      <Nav/>
-      <SearchBar />
-      <Content heading={"Movies"} dataObj={contentData.filter((data) => data.category === "Movie") } />
-  </div>
-)
+  const [dataObj, setDataObj] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    getData().then((data) => {
+      setDataObj(data);
+      setLoading(false);
+    });
+  }, []);
+  return (
+    <div className="showcase">
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <Nav />
+          <SearchBar />
+          <Content
+            heading={"Movies"}
+            dataObj={dataObj.filter((data) => data.media_type === "movie")}
+          />
+        </>
+      )}
+    </div>
+  );
 }
