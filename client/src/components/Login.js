@@ -1,5 +1,6 @@
 import { useState } from "react";
 import logo from "../assets/logo.svg";
+import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 function Login({ getEmail }) {
@@ -14,6 +15,7 @@ function Login({ getEmail }) {
     });
   }
 
+  const navigate = useNavigate();
   async function handleSubmit(event) {
     event.preventDefault();
     const person = { ...form };
@@ -30,6 +32,7 @@ function Login({ getEmail }) {
         throw new Error(message.msg);
       } else {
         getEmail(form.email);
+        navigate("/home");
       }
     } catch (e) {
       window.alert(e);

@@ -1,9 +1,11 @@
 import { useState } from "react";
 
 function BookmarkIcon({ userData, data }) {
-  const [isBookmared, setBookmarked] = useState(false);
+  const [isBookmarked, setBookmarked] = useState(data.isBookmarked);
+  console.log(userData);
   async function postData() {
     try {
+      data.isBookmarked = true;
       const response = await fetch(
         `http://localhost:3001/auth/bookmark/${userData}`,
         {
@@ -20,15 +22,37 @@ function BookmarkIcon({ userData, data }) {
       console.log(e);
     }
   }
-  function handleBookmark() {
-    if (!isBookmared) {
-      postData();
+
+  async function removeData() {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/auth/removeBookmark/${userData}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      const message = await response.json();
+      console.log(message.msg);
+    } catch (e) {
+      console.log(e);
     }
-    setBookmarked(!isBookmared);
+  }
+
+  function handleBookmark() {
+    if (isBookmarked === false) {
+      postData();
+    } else {
+      removeData();
+    }
+    setBookmarked(!isBookmarked);
   }
   return (
     <>
-      {!isBookmared ? (
+      {!isBookmarked ? (
         <svg
           onClick={handleBookmark}
           className="bookmarkIcon"

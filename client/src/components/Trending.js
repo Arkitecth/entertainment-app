@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import movieCategoryIcon from "../assets/icon-category-movie.svg";
 import seriesCategoryIcon from "../assets/icon-category-tv.svg";
 import BookmarkIcon from "./BookmarkIcon";
-async function getTrending() {
-  const response = await fetch("http://localhost:3001/auth/trending");
+async function getTrending(userData) {
+  const response = await fetch(
+    `http://localhost:3001/auth/trending/${userData}`
+  );
   const trending = await response.json();
   return trending;
 }
@@ -11,10 +13,10 @@ async function getTrending() {
 export default function Trending({ userData }) {
   const [dataObj, setDataObj] = useState([]);
   useEffect(() => {
-    getTrending().then((data) => {
+    getTrending(userData).then((data) => {
       setDataObj(data);
     });
-  }, []);
+  }, [userData]);
 
   return (
     <div className="trending-page">
@@ -49,7 +51,7 @@ export default function Trending({ userData }) {
                     )}
                     {data.media_type}
                   </li>
-                  <li>{data.date}</li>
+                  <li>{data.genre}</li>
                 </ul>
               </div>
               <h2>{data.title}</h2>

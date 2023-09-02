@@ -21,9 +21,13 @@ function App() {
           <Route exact path="/" element={<Login getEmail={getEmail} />} />
           <Route exact path="/sign-up" Component={SignUp} />
           <Route exact path="/home" element={<Home email={email} />} />
-          <Route exact path="/movies" Component={Movies} />
-          <Route exact path="/series" Component={Series} />
-          <Route exact path="/bookmarks" Component={Bookmark} />
+          <Route exact path="/movies" element={<Movies email={email} />} />
+          <Route exact path="/series" element={<Series email={email} />} />
+          <Route
+            exact
+            path="/bookmarks"
+            element={<Bookmark userData={email} />}
+          />
           <Route exact path="/search" Component={Search} />
         </Routes>
       </Router>

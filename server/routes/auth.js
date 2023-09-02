@@ -1,5 +1,11 @@
 import express from "express";
-import { bookmark, login, register } from "../controllers/auth.js";
+import {
+  bookmark,
+  getBookmarked,
+  login,
+  register,
+  removeBookmark,
+} from "../controllers/auth.js";
 import { trending, discover } from "../controllers/api.js";
 
 const router = express.Router();
@@ -10,8 +16,12 @@ router.post("/login", login);
 
 router.post("/bookmark/:email", bookmark);
 
-router.get("/trending", trending);
+router.post("/removeBookmark/:email", removeBookmark);
 
-router.get("/discover", discover);
+router.get("/getBookmarks/:email", getBookmarked);
+
+router.get("/trending/:email", trending);
+
+router.get("/discover/:email", discover);
 
 export default router;

@@ -43,9 +43,29 @@ export const bookmark = async (req, res) => {
   const user = await User.updateOne(
     { email: email },
     {
-      $push: { movies: movie },
+      $addToSet: { movies: movie },
     }
   );
   if (!user) return res.status(400).json({ msg: "Bookmark Failed" });
   res.status(200).json({ msg: "Bookmark succeeded" });
+};
+
+export const removeBookmark = async (req, res) => {
+  const movie = req.body;
+  const email = req.params.email;
+  const user = await User.updateOne(
+    { email: email },
+    { $pull: { movies: movie } }
+  );
+  if (!user) return res.status(400).json({ msg: "Bookmark Failed" });
+  res.status(200).json({ msg: "Bookmark succeeded" });
+};
+
+export const getBookmarked = async (req, res) => {
+  const email = req.params.email;
+  const user = await User.findOne({
+    email: email,
+  });
+  if (!user) return res.status(400).json({ msg: "Get Failed" });
+  res.status(200).json(user["movies"]);
 };

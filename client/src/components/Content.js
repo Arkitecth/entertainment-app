@@ -1,7 +1,7 @@
 import movieCategoryIcon from "../assets/icon-category-movie.svg";
 import BookmarkIcon from "./BookmarkIcon";
 import seriesCategoryIcon from "../assets/icon-category-tv.svg";
-export default function Content({ heading, row, dataObj }) {
+export default function Content({ heading, row, dataObj, userData }) {
   return (
     <div className={`main-page ${row}`}>
       <h2 className="heading">{heading}</h2>
@@ -17,7 +17,7 @@ export default function Content({ heading, row, dataObj }) {
               backgroundPosition: "center",
             }}
           >
-            <BookmarkIcon />
+            <BookmarkIcon userData={userData} data={data} />
             <div className="description content">
               <div className="details">
                 <ul>

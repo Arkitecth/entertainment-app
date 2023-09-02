@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-
+import User from "../model/User.js";
 export const trending = async (req, res) => {
   const url = "https://api.themoviedb.org/3/trending/all/day?language=en-US";
 
@@ -13,7 +13,8 @@ export const trending = async (req, res) => {
       element.release_date === undefined
         ? element.first_air_date.split("-")[0]
         : element.release_date.split("-")[0];
-
+    let match = await checkDatabase(req.params.email, element, trendingResults);
+    if (match) continue;
     trendingResults.push({
       title: element.name || element.title,
       media_type: element.media_type,
@@ -21,10 +22,28 @@ export const trending = async (req, res) => {
       date: airDate,
       cover: element.backdrop_path,
       genre: genre,
+      isBookmarked: false,
     });
   }
   res.status(200).json(trendingResults);
 };
+
+async function checkDatabase(email, element, results) {
+  let match = false;
+  const user = await User.findOne({
+    email: email,
+  });
+  for (const userMovie of user["movies"]) {
+    if (element.id === userMovie.id) {
+      results.push(userMovie);
+      match = true;
+      break;
+    } else {
+      match = false;
+    }
+  }
+  return match;
+}
 
 async function callApi(url, req, res) {
   const options = {
@@ -100,6 +119,8 @@ export const discover = async (req, res) => {
 
   for (const element of movieResults) {
     let genre = await getGenre(element.id, "movie");
+    let match = await checkDatabase(req.params.email, element, discoverResults);
+    if (match) continue;
     discoverResults.push({
       title: element.title,
       media_type: "movie",
@@ -107,11 +128,14 @@ export const discover = async (req, res) => {
       cover: element.backdrop_path,
       date: element.release_date.split("-")[0],
       genre: genre,
+      isBookmarked: false,
     });
   }
 
   for (const element of seriesResults) {
     let genre = await getGenre(element.id, "tv");
+    let match = await checkDatabase(req.params.email, element, discoverResults);
+    if (match) continue;
     discoverResults.push({
       title: element.name,
       media_type: "tv",
@@ -119,6 +143,7 @@ export const discover = async (req, res) => {
       cover: element.backdrop_path,
       date: element.first_air_date.split("-")[0],
       genre: genre,
+      isBookmarked: false,
     });
   }
 
