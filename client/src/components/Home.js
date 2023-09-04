@@ -5,24 +5,27 @@ import SearchBar from "./SearchBar";
 import Spinner from "./Spinner";
 import { useState, useEffect } from "react";
 
-export async function getData(userData) {
-  const response = await fetch(
-    `http://localhost:3001/auth/discover/${userData}`
-  );
+export async function getData(url) {
+  const response = await fetch(url);
   const results = await response.json();
   return results;
 }
 
 export default function Home({ email }) {
   const [dataObj, setDataObj] = useState([]);
+  const [trendingData, setTrendingData] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(email);
+  const discoverUrl = `http://localhost:3001/auth/discover/${email}`;
+  const trendingUrl = `http://localhost:3001/auth/trending/${email}`;
   useEffect(() => {
-    getData(email).then((data) => {
+    getData(discoverUrl).then((data) => {
       setDataObj(data);
       setLoading(false);
     });
-  }, [email]);
+    getData(trendingUrl).then((data) => {
+      setTrendingData(data);
+    });
+  }, [discoverUrl, trendingUrl]);
   return (
     <div className="showcase">
       {loading ? (
@@ -32,7 +35,7 @@ export default function Home({ email }) {
           <Nav />
           <SearchBar />
           {/* Trending Page */}
-          <Trending userData={email} />
+          <Trending dataObj={trendingData} userData={email} />
           {/* Recommended Page */}
           <Content
             userData={email}

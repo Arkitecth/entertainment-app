@@ -8,12 +8,13 @@ import Spinner from "./Spinner";
 export default function Movies({ email }) {
   const [dataObj, setDataObj] = useState([]);
   const [loading, setLoading] = useState(true);
+  const url = `http://localhost:3001/auth/discover/${email}`;
   useEffect(() => {
-    getData(email).then((data) => {
+    getData(url).then((data) => {
       setDataObj(data);
       setLoading(false);
     });
-  }, [email]);
+  }, [url]);
   return (
     <div className="showcase">
       {loading ? (

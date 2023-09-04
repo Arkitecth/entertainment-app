@@ -28,7 +28,7 @@ function App() {
             path="/bookmarks"
             element={<Bookmark userData={email} />}
           />
-          <Route exact path="/search" Component={Search} />
+          <Route exact path="/search" element={<Search email={email} />} />
         </Routes>
       </Router>
     </>

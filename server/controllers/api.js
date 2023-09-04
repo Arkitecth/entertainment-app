@@ -69,7 +69,7 @@ async function callApi(url, req, res) {
 
 async function getGenre(id, mediaType) {
   let url = "";
-  let rating = "";
+  let rating = "Nan";
   if (mediaType === "movie") {
     url = `https://api.themoviedb.org/3/${mediaType}/${id}?append_to_response=release_dates&language=en-US`;
     let result = await callApi(url);
@@ -83,7 +83,7 @@ async function getGenre(id, mediaType) {
     ) {
       rating = filteredResults.release_dates[0].certification;
     } else {
-      rating = result.genres[0].name;
+      if (result.genre !== undefined) rating = result.genres[0].name;
     }
   } else {
     url = `https://api.themoviedb.org/3/tv/${id}?append_to_response=content_ratings&language=en-US`;
@@ -148,4 +148,33 @@ export const discover = async (req, res) => {
   }
 
   res.status(200).json(discoverResults);
+};
+
+export const search = async (req, res) => {
+  const url = `https://api.themoviedb.org/3/search/multi?query=${req.params.search}&include_adult=false&language=en-US&page=1`;
+  const search = await callApi(url);
+  const searchData = search["results"];
+  const searchResults = [];
+
+  for (const element of searchData) {
+    if (element.media_type === "person" || element.backdrop_path === null)
+      continue;
+    let genre = await getGenre(element.id, element.media_type);
+    let airDate =
+      element.release_date === undefined
+        ? element.first_air_date.split("-")[0]
+        : element.release_date.split("-")[0];
+    let match = await checkDatabase(req.params.email, element, searchResults);
+    if (match) continue;
+    searchResults.push({
+      title: element.name || element.title,
+      media_type: element.media_type,
+      id: element.id,
+      date: airDate,
+      cover: element.backdrop_path,
+      genre: genre,
+      isBookmarked: false,
+    });
+  }
+  res.status(200).json(searchResults);
 };

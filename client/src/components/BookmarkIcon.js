@@ -2,7 +2,6 @@ import { useState } from "react";
 
 function BookmarkIcon({ userData, data }) {
   const [isBookmarked, setBookmarked] = useState(data.isBookmarked);
-  console.log(userData);
   async function postData() {
     try {
       data.isBookmarked = true;

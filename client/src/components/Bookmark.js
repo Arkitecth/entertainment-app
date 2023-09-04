@@ -2,33 +2,18 @@ import Nav from "./Nav";
 import Content from "./Content";
 import SearchBar from "./SearchBar";
 import { useState, useEffect } from "react";
-async function getBookmarked(userData) {
-  try {
-    const response = await fetch(
-      `http://localhost:3001/auth/getBookmarks/${userData}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const data = await response.json();
-    return data;
-  } catch (e) {
-    console.log(e);
-  }
-}
+import { getData } from "./Home";
 
 export default function Bookmark({ userData }) {
   let moviePosition = "grid-row-2";
   let seriesPosition = "grid-row-3";
   const [dataObj, setDataObj] = useState([]);
+  const url = `http://localhost:3001/auth/getBookmarks/${userData}`;
   useEffect(() => {
-    getBookmarked(userData).then((data) => {
+    getData(url).then((data) => {
       setDataObj(data);
     });
-  }, [userData]);
+  }, [url]);
 
   return (
     <div className="showcase">

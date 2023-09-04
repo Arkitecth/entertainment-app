@@ -1,23 +1,8 @@
-import React, { useEffect, useState } from "react";
 import movieCategoryIcon from "../assets/icon-category-movie.svg";
 import seriesCategoryIcon from "../assets/icon-category-tv.svg";
 import BookmarkIcon from "./BookmarkIcon";
-async function getTrending(userData) {
-  const response = await fetch(
-    `http://localhost:3001/auth/trending/${userData}`
-  );
-  const trending = await response.json();
-  return trending;
-}
 
-export default function Trending({ userData }) {
-  const [dataObj, setDataObj] = useState([]);
-  useEffect(() => {
-    getTrending(userData).then((data) => {
-      setDataObj(data);
-    });
-  }, [userData]);
-
+export default function Trending({ userData, dataObj }) {
   return (
     <div className="trending-page">
       <h2>Trending</h2>

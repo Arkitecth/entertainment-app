@@ -6,7 +6,7 @@ import {
   register,
   removeBookmark,
 } from "../controllers/auth.js";
-import { trending, discover } from "../controllers/api.js";
+import { trending, discover, search } from "../controllers/api.js";
 
 const router = express.Router();
 
@@ -23,5 +23,7 @@ router.get("/getBookmarks/:email", getBookmarked);
 router.get("/trending/:email", trending);
 
 router.get("/discover/:email", discover);
+
+router.get("/search/:email/:search", search);
 
 export default router;

@@ -5,15 +5,16 @@ import { getData } from "./Home";
 import { useState, useEffect } from "react";
 import Spinner from "./Spinner";
 
-export default function Series() {
+export default function Series({ email }) {
   const [dataObj, setDataObj] = useState([]);
   const [loading, setLoading] = useState(true);
+  const url = `http://localhost:3001/auth/discover/${email}`;
   useEffect(() => {
-    getData().then((data) => {
+    getData(url).then((data) => {
       setDataObj(data);
       setLoading(false);
     });
-  }, []);
+  }, [url]);
   return (
     <div className="showcase">
       {loading ? (
