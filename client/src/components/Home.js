@@ -11,10 +11,11 @@ export async function getData(url) {
   return results;
 }
 
-export default function Home({ email }) {
+export default function Home() {
   const [dataObj, setDataObj] = useState([]);
   const [trendingData, setTrendingData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const email = localStorage.getItem("id");
   const discoverUrl = `http://localhost:3001/auth/discover/${email}`;
   const trendingUrl = `http://localhost:3001/auth/trending/${email}`;
   useEffect(() => {
@@ -35,13 +36,9 @@ export default function Home({ email }) {
           <Nav />
           <SearchBar />
           {/* Trending Page */}
-          <Trending dataObj={trendingData} userData={email} />
+          <Trending dataObj={trendingData} />
           {/* Recommended Page */}
-          <Content
-            userData={email}
-            dataObj={dataObj}
-            heading={"Recommended For You"}
-          />
+          <Content dataObj={dataObj} heading={"Recommended For You"} />
         </>
       )}
     </div>

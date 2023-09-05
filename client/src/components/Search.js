@@ -6,12 +6,13 @@ import { useEffect, useState } from "react";
 import { getData } from "./Home";
 import Spinner from "./Spinner";
 
-export default function Search({ email }) {
+export default function Search() {
   const [dataObj, setDataObj] = useState([]);
   const [loading, setLoading] = useState(true);
   const { state } = useLocation();
   let moviePosition = "grid-row-2";
   const title = state.title;
+  let email = localStorage.getItem("id");
   let searchUrl = `http://localhost:3001/auth/search/${email}/${title}`;
   useEffect(() => {
     getData(searchUrl).then((data) => {
@@ -30,7 +31,6 @@ export default function Search({ email }) {
           <SearchBar loading={setLoading} />
           <Content
             row={moviePosition}
-            userData={email}
             heading={`Found ${dataObj.length} Results For ${title}`}
             dataObj={dataObj}
           />

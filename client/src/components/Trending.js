@@ -2,7 +2,8 @@ import movieCategoryIcon from "../assets/icon-category-movie.svg";
 import seriesCategoryIcon from "../assets/icon-category-tv.svg";
 import BookmarkIcon from "./BookmarkIcon";
 
-export default function Trending({ userData, dataObj }) {
+export default function Trending({ dataObj }) {
+  let userData = localStorage.getItem("id");
   return (
     <div className="trending-page">
       <h2>Trending</h2>

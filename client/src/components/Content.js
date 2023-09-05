@@ -1,7 +1,8 @@
 import movieCategoryIcon from "../assets/icon-category-movie.svg";
 import BookmarkIcon from "./BookmarkIcon";
 import seriesCategoryIcon from "../assets/icon-category-tv.svg";
-export default function Content({ heading, row, dataObj, userData }) {
+export default function Content({ heading, row, dataObj }) {
+  let userData = localStorage.getItem("id");
   return (
     <div className={`main-page ${row}`}>
       <h2 className="heading">{heading}</h2>

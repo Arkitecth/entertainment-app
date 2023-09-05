@@ -5,9 +5,10 @@ import { getData } from "./Home";
 import { useState, useEffect } from "react";
 import Spinner from "./Spinner";
 
-export default function Series({ email }) {
+export default function Series() {
   const [dataObj, setDataObj] = useState([]);
   const [loading, setLoading] = useState(true);
+  const email = localStorage.getItem("id");
   const url = `http://localhost:3001/auth/discover/${email}`;
   useEffect(() => {
     getData(url).then((data) => {

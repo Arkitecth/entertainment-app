@@ -13,22 +13,27 @@ function App() {
   const [email, setEmail] = useState("");
   function getEmail(element) {
     setEmail(element);
+    localStorage.setItem("id", element);
   }
   return (
     <>
       <Router>
         <Routes>
           <Route exact path="/" element={<Login getEmail={getEmail} />} />
-          <Route exact path="/sign-up" Component={SignUp} />
-          <Route exact path="/home" element={<Home email={email} />} />
-          <Route exact path="/movies" element={<Movies email={email} />} />
-          <Route exact path="/series" element={<Series email={email} />} />
+          <Route
+            exact
+            path="/sign-up"
+            element={<SignUp getEmail={getEmail} />}
+          />
+          <Route exact path="/home" Component={Home} />
+          <Route exact path="/movies" Component={Movies} />
+          <Route exact path="/series" Component={Series} />
           <Route
             exact
             path="/bookmarks"
             element={<Bookmark userData={email} />}
           />
-          <Route exact path="/search" element={<Search email={email} />} />
+          <Route exact path="/search" Component={Search} />
         </Routes>
       </Router>
     </>
